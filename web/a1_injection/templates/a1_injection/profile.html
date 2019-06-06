@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+
+{% block title %}Profile of {{ request.GET.username }}{% endblock %}
+
+{% block content %}
+
+	<p>Profile of {{ request.GET.username }}</p>
+	{% if not info.birthdate_hidden or request.GET.username == request.user.login %}
+		<p>Birthdate: {{ info.birthdate }}
+        {% if info.birthdate_hidden %}
+            <i class="note">this is hidden information</i>
+        {% endif %}
+        </p>
+	{% endif %}
+	{% if info.birthdate_hidden and request.GET.username != request.user.login %}
+		<p class="warning">Birthdate is hidden</p>
+	{% endif %}
+	{% if info.bio %}
+        <hr>
+		<p>Bio:<br>{{ info.bio | linebreaksbr }}</p>
+	{% endif %}
+{% endblock %}

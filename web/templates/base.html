@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+{% load static %}
+{% load hosts %}
+
+<html>
+	<head>
+		<title>{% block title %}{% endblock %}</title>
+		<link rel="stylesheet" type="text/css" href="{% static 'stylesheet.css' %}">
+		{% block inside_head %}{% endblock %}
+	</head>
+	<body>
+        {% block top_panel %}{% endblock %}
+		<main>
+            <div class="content">
+			    {% block content %}{% endblock %}
+		    </div>
+        </main>
+        {% if not hide_footer %}
+            <footer>
+                <a href="{% host_url 'index' host 'default' %}">Back to main page</a>
+            </footer>
+        {% endif %}
+	</body>
+</html>
