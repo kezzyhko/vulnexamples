@@ -3,3 +3,4 @@ RUN mkdir /web
 WORKDIR /web
 COPY . /web/
 RUN pip install -r requirements.txt
+RUN python manage.py collectstatic --no-input
