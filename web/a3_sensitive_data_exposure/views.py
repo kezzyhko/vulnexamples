@@ -59,6 +59,7 @@ def robots_view(request):
 
 
 def logs_view(request):
+    log(request)
     return render(request, 'a3_sensitive_data_exposure/logs.txt',
                   {'r': random.random()}, content_type="text/plain")
 
