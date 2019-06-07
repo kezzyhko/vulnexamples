@@ -55,7 +55,10 @@ async def check_for_new_and_say_hello():
                     user = e.find_element_by_class_name("username")
                     user = user.text
 
-                    send("Hello, %s!" % user)
+                    if user == "admin":
+                        send("Hello, %s! (Yes, I know that I said hello to myself)" % user)
+                    else:
+                        send("Hello, %s!" % user)
 
                     sent = True
 
