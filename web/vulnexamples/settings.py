@@ -31,6 +31,7 @@ INSTALLED_APPS = [
     'a6_security_misconfiguration',
     'a7_xss',
     'a8_insecure_deserialization',
+    'a9_cve',
     'channels',
     'django_hosts',
     'django.contrib.admin',

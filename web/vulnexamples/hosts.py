@@ -11,4 +11,5 @@ host_patterns = patterns(
     host('a6', 'a6_security_misconfiguration.urls', name='a6_security_misconfiguration'),
     host('a7', 'a7_xss.urls', name='a7_xss'),
     host('a8', 'a8_insecure_deserialization.urls', name='a8_insecure_deserialization'),
+    host('a9', 'a9_cve.urls', name='a9_cve'),
 )
