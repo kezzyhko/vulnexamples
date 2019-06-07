@@ -13,21 +13,17 @@ services:
 
         web:
             build: ./web
-            command: bash -c "python manage.py runserver 0.0.0.0:8000"
+            command: bash -c "python3 manage.py runserver 0.0.0.0:8000"
             restart: always
             ports:
                 - "8000:8000"
-            volumes:
-                - ./web:/web
             depends_on:
                 - redis
 
         bot:
             build: ./bot
-            command: bash -c "python admin_bot.py"
+            command: bash -c "python3 admin_bot.py"
             restart: always
-            volumes:
-                - ./bot:/bot
             depends_on:
                 - web
             network_mode: "host"

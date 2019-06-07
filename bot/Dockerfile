@@ -2,7 +2,7 @@ FROM python:3.6.4
 RUN mkdir /bot
 WORKDIR /bot
 COPY . /bot/
-RUN pip install selenium==3.141.0
+RUN pip3 install selenium==3.141.0
 
 ENV PHANTOMJS_VERSION 2.1.1
 ENV PHANTOMJS_PLATFORM linux-x86_64
