@@ -1,4 +1,4 @@
-from django.contrib.auth import logout
+from django.contrib.auth import logout, get_user_model
 from django.shortcuts import render, redirect
 from django_hosts.resolvers import reverse
 from django.views.defaults import bad_request, permission_denied, page_not_found, server_error
@@ -20,7 +20,8 @@ def log(request, status=None):
 
 def index(request):
     log(request)
-    return render(request, 'a3_sensitive_data_exposure/index.html')
+    return render(request, 'a3_sensitive_data_exposure/index.html',
+                  {'users': get_user_model().objects.filter(subdomain='a3_sensitive_data_exposure')})
 
 
 class RegistrationView(HostsRegistrationView):

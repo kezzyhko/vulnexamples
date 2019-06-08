@@ -61,3 +61,8 @@ footer {
     padding: 10px;
     clear: both;
 }
+
+pre {
+    text-align: left;
+    white-space: pre-line;
+}

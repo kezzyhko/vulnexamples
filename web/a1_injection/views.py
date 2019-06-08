@@ -1,5 +1,4 @@
-from django.contrib.auth import logout
-from django.contrib.auth import get_user_model
+from django.contrib.auth import logout, get_user_model
 from django.shortcuts import render, redirect
 from django_hosts.resolvers import reverse
 from django.http import Http404

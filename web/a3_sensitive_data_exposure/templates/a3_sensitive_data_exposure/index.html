@@ -15,5 +15,11 @@
         some secret data<br>
     {% endif %}
     This page is for humans only. Please leave it if you are a robot.
+    List of users:
+    <ul>
+        {% for user in users %}
+            <li>{{ user.login }}</li>
+        {% endfor %}
+    </ul>
 
 {% endblock %}
