@@ -1,34 +1,42 @@
 version: '3'
 services:
 
-        redis:
-            container_name: redis
-            image: redis
-            restart: always
-            command: ["redis-server", "--appendonly", "yes"]
-            ports:
-                - "6379:6379"
-            volumes:
-                - redis-data:/data
+    redis:
+        container_name: redis
+        image: redis
+        restart: always
+        command: ["redis-server", "--appendonly", "yes"]
+        expose:
+            - "6379"
+        volumes:
+            - redis-data:/data
 
-        web:
-            build: ./web
-            command: bash -c "python3 manage.py runserver 0.0.0.0:8000"
-            restart: always
-            ports:
-                - "8000:8000"
-            depends_on:
-                - redis
+    web:
+        container_name: web
+        build: ./web
+        command: bash -c "python3 -u manage.py runserver 0.0.0.0:8000"
+        restart: always
+        ports:
+            - "8000:8000"
+        depends_on:
+            - redis
 
-        bot:
-            build: ./bot
-            command: bash -c "python3 admin_bot.py"
-            restart: always
-            depends_on:
-                - web
-            network_mode: "host"
+    bot:
+        container_name: bot
+        build: ./bot
+        command: bash -c "python3 -u admin_bot.py"
+        restart: always
+        depends_on:
+            - web
+        network_mode: "host"
 
+    books_server:
+        container_name: books_server
+        build: ./books_server
+        command: bash -c "python3 -u server.py 8001 files"
+        expose:
+            - "8001"
+        restart: always
 
 volumes:
-        redis-data:
-        pgdata:
+    redis-data:

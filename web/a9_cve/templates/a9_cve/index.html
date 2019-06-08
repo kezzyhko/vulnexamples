@@ -1,16 +1,12 @@
 {% extends 'base.html' %}
+{% load static %}
 
 
-{% block title %}a9{% endblock %}
+{% block title %}Books trial versions{% endblock %}
 
 {% block content %}
 
-    {% if request.user.is_authenticated %}
-        Welcome, {{ request.user.login }}<br>
-        <a href="{% url 'logout' %}">Log Out</a><br>
-    {% else %}
-        <a href="{% url 'login' %}">Log In</a> / <a href="{% url 'register' %}">Register</a><br>
-    {% endif %}
-    a9
+    {% include 'form.html' with buttontext='See free part of this book' %}
+    <pre>{{ booktext }}</pre>
 
 {% endblock %}

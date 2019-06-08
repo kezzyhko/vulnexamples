@@ -1,24 +1,28 @@
-from django.contrib.auth import logout
-from django.shortcuts import render, redirect
-from django_hosts.resolvers import reverse
-from django.views.defaults import bad_request, permission_denied, page_not_found, server_error
-import random
+from django.shortcuts import render
+from urllib.request import Request, urlopen
 
-from vulnexamples.views import HostsLoginView, HostsRegistrationView
+from vulnexamples.views import MyFormView
+from .forms import BooksForm
 
 
-def index(request):
-    return render(request, 'a9_cve/index.html')
+class IndexView(MyFormView):
+    template_name = 'a9_cve/index.html'
+    form_class = BooksForm
 
+    def validate(self, request):
+        pass  # TODO
 
-class RegistrationView(HostsRegistrationView):
-    subdomain = 'a9_cve'
+    def on_success(self, request):
+        # response = urlopen('http://books_server:8001/%s' % self.form.cleaned_data['path_to_book'])
+        req = Request('http://books_server:8001/%s' % self.form.cleaned_data['path_to_book'])
+        req.add_header('Range', 'bytes=0-700')
+        response = urlopen(req)
+        self.headers = response.headers
+        self.booktext = response.read().decode()
+        return self.render_form(request)
 
-
-class LoginView(HostsLoginView):
-    subdomain = 'a9_cve'
-
-
-def logout_view(request):
-    logout(request)
-    return redirect(reverse('index', host='a9_cve'))
+    def render_form(self, request):
+        return render(request, self.template_name,
+                      {'form': self.form,
+                       'headers': getattr(self, 'headers', ''),
+                       'booktext': getattr(self, 'booktext', '')})
