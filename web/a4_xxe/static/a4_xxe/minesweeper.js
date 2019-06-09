@@ -16,7 +16,7 @@ var state = "game"
 var table = document.getElementById("map");
 
 function generate(_x, _y) { 
-    if (size <= 3){
+    if (n <= 3){
         alert("too small size");
         return;
     }
