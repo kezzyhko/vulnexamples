@@ -15,14 +15,29 @@ var generated = false;
 var state = "game"
 var table = document.getElementById("map");
 
-function generate(_x, _y){
-    if (mines_count >= (n*n)){
-        alert("too many mines");
+function generate(_x, _y) { 
+    if (size <= 3){
+        alert("too small size");
+        return;
+    }
+
+    if (mines_count >= (n*n) - 9){
+        alert("too many mines for this size");
         mines_count = 1;
         remain = n * n - mines_count;
     }
+
+    prohibited = [[_x-1, _y-1],
+                  [_x  , _y-1],
+                  [_x+1, _y-1],
+                  [_x-1, _y  ],
+                  [_x  , _y  ],
+                  [_x+1, _y  ],
+                  [_x-1, _y+1],
+                  [_x  , _y+1],
+                  [_x+1, _y+1]]
     
-    var arr = [] 
+    var arr = []
     for (var i = 0; i < n * n; ++i){
         arr[i] = [Math.floor(i / n), i % n];
     }
@@ -36,7 +51,7 @@ function generate(_x, _y){
     }
     var kostyl = 0;
     for (var i = 0; i < mines_count; ++i){
-        if (arr[i][0] == _x && arr[i][1] == _y)
+        while (contains(prohibited, arr[i + kostyl]))
             kostyl += 1;
         mines[i] = arr[i + kostyl];
     }
