@@ -195,7 +195,9 @@ class LoginView(HostsLoginView):
 
 def logout_view(request):
     logout(request)
-    return redirect(reverse('index', host='a8_insecure_deserialization'))
+    response = redirect(reverse('index', host='a8_insecure_deserialization'))
+    response.set_cookie("cart" "")
+    return response
 
 
 def buy(request):
