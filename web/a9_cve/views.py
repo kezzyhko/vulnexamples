@@ -15,7 +15,7 @@ class IndexView(MyFormView):
     def on_success(self, request):
         # response = urlopen('http://books_server:8001/%s' % self.form.cleaned_data['path_to_book'])
         req = Request('http://books_server:8001/%s' % self.form.cleaned_data['path_to_book'])
-        req.add_header('Range', 'bytes=0-700')
+        req.add_header('Range', 'bytes=0-300')
         response = urlopen(req)
         self.headers = response.headers
         self.booktext = response.read().decode()
