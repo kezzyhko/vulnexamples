@@ -1,7 +1,9 @@
 # vulnexamples
-Хомяк хомяк и в продакшн
+"Хомяк хомяк и в продакшн"
 
-[Previous version of this repository](https://github.com/Bogotolec/vulnexamples)
+## Useful links
+* [Previous version of this repository](https://github.com/Bogotolec/vulnexamples)
+* [Chat from `a7_xss` separately](https://github.com/kezzyhko/django-redis-chat)
 
 
 ## Quick start:
